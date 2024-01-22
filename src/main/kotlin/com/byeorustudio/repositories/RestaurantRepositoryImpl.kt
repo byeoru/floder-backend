@@ -1,5 +1,6 @@
 package com.byeorustudio.repositories
 
+import com.byeorustudio.domain.tables.Food
 import com.byeorustudio.domain.tables.Restaurant
 import com.byeorustudio.execAndMap
 import com.byeorustudio.modules.loginUser
@@ -33,5 +34,14 @@ class RestaurantRepositoryImpl : RestaurantRepository {
             "name" to rs.getString("name")
         ) }
         return@dbQuery results
+    }
+
+    override suspend fun saveFood(name: String, description: String, normalPrice: Int, restaurant: Restaurant): Long = dbQuery {
+        Food.new {
+            this.name = name
+            this.description = description
+            this.normalPrice = normalPrice
+            this.restaurant = restaurant
+        }.id.value
     }
 }

@@ -1,5 +1,6 @@
 package com.byeorustudio.services
 
+import com.byeorustudio.domain.dtos.FoodResisterDto
 import com.byeorustudio.domain.dtos.RestaurantResisterDto
 import com.byeorustudio.repositories.RestaurantRepositoryImpl
 import com.byeorustudio.services.interfaces.RestaurantService
@@ -29,6 +30,16 @@ class RestaurantServiceImpl: RestaurantService {
             pageNumber,
             customerLocation,
             maxDistanceMeter
+        )
+    }
+
+    override suspend fun addFood(requestDto: FoodResisterDto, restaurantPk: Long): Long {
+        val restaurant = restaurantRepositoryImpl.findByPk(restaurantPk)
+        return restaurantRepositoryImpl.saveFood(
+            requestDto.name,
+            requestDto.description,
+            requestDto.normalPrice,
+            restaurant
         )
     }
 }
