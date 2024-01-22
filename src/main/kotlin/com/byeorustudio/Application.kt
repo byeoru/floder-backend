@@ -1,5 +1,6 @@
 package com.byeorustudio
 
+import com.byeorustudio.modules.restaurantModule
 import com.byeorustudio.modules.userModule
 import com.byeorustudio.plugins.*
 import io.ktor.server.application.*
@@ -12,7 +13,8 @@ fun main(args: Array<String>) {
 fun Application.module() {
     install(Koin) {
         modules(
-            userModule
+            userModule,
+            restaurantModule
         )
     }
     jwtInit()

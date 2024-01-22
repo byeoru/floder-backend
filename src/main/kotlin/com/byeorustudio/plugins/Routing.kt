@@ -1,5 +1,6 @@
 package com.byeorustudio.plugins
 
+import com.byeorustudio.routers.restaurantRouter
 import com.byeorustudio.routers.userRouter
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -26,5 +27,6 @@ fun Application.configureRouting() {
     }
     routing {
         userRouter()
+        restaurantRouter()
     }
 }
