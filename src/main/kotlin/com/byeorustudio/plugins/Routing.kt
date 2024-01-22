@@ -1,10 +1,12 @@
 package com.byeorustudio.plugins
 
+import com.byeorustudio.routers.userRouter
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import jdk.jshell.spi.ExecutionControl.InternalException
 
 fun Application.configureRouting() {
@@ -21,5 +23,8 @@ fun Application.configureRouting() {
         status(HttpStatusCode.Unauthorized) { call, status ->
             call.respondText(text = "$status: Token is not valid or has expired", status = HttpStatusCode.Unauthorized)
         }
+    }
+    routing {
+        userRouter()
     }
 }
