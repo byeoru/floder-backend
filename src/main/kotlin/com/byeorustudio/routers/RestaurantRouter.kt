@@ -1,5 +1,6 @@
 package com.byeorustudio.routers
 
+import com.byeorustudio.domain.dtos.FoodListDto
 import com.byeorustudio.domain.dtos.FoodResisterDto
 import com.byeorustudio.domain.dtos.RestaurantResisterDto
 import com.byeorustudio.domain.dtos.RestaurantSimpleDto
@@ -112,6 +113,15 @@ fun Routing.restaurantRouter() {
                     call.respond(message = mapOf("pk" to pk), status = HttpStatusCode.Created)
                 }
             }
+//            authenticate {
+                get {
+                    val restaurantPk = call.parameters["restaurant_pk"]?.toLongOrNull() ?: return@get call.respondText(
+                        "${HttpStatusCode.BadRequest}: Path parameter not found or not number", status = HttpStatusCode.BadRequest
+                    )
+                    val foodEntities = restaurantServiceImpl.getFoodsByRestaurantPk(restaurantPk)
+                    call.respond(message = foodEntities.map { FoodListDto.fromEntity(it) }, status = HttpStatusCode.OK)
+                }
+//            }
         }
     }
 }

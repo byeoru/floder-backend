@@ -1,5 +1,6 @@
 package com.byeorustudio.repositories.interfaces
 
+import com.byeorustudio.domain.tables.Food
 import com.byeorustudio.domain.tables.Restaurant
 import net.postgis.jdbc.geometry.Point
 
@@ -8,4 +9,5 @@ interface RestaurantRepository {
     suspend fun findByPk(pk: Long): Restaurant
     suspend fun findListByDistance(pageSize: Int, pageNumber: Int, customerLocation: Point, maxDistanceMeter: Long): List<Map<String, Any>>
     suspend fun saveFood(name: String, description: String, normalPrice: Int, restaurant: Restaurant): Long
+    suspend fun findFoodsByRestaurantPk(pk: Long): List<Food>
 }

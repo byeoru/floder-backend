@@ -1,6 +1,7 @@
 package com.byeorustudio.repositories
 
 import com.byeorustudio.domain.tables.Food
+import com.byeorustudio.domain.tables.Foods
 import com.byeorustudio.domain.tables.Restaurant
 import com.byeorustudio.execAndMap
 import com.byeorustudio.modules.loginUser
@@ -43,5 +44,9 @@ class RestaurantRepositoryImpl : RestaurantRepository {
             this.normalPrice = normalPrice
             this.restaurant = restaurant
         }.id.value
+    }
+
+    override suspend fun findFoodsByRestaurantPk(pk: Long): List<Food> = dbQuery {
+        Food.find { Foods.restaurant eq pk }.toList()
     }
 }

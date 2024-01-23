@@ -1,5 +1,8 @@
 package com.byeorustudio.plugins
 
+import com.byeorustudio.domain.tables.Foods
+import com.byeorustudio.domain.tables.Restaurants
+import com.byeorustudio.domain.tables.Users
 import io.ktor.server.application.*
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.*
@@ -24,7 +27,9 @@ fun Application.configureDatabases() {
         SchemaUtils.drop()
 
         // Table 생성
-//        SchemaUtils.create()
+        SchemaUtils.create(
+            Users, Restaurants, Foods
+        )
     }
 }
 

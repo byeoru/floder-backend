@@ -19,6 +19,7 @@ class UserRepositoryImpl: UserRepository {
     }
 
     override suspend fun findByPk(pk: Long): User = dbQuery {
+
         User.findById(pk)
     } ?: throw NotFoundException("User not found")
 

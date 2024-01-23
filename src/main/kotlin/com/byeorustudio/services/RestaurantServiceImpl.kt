@@ -2,6 +2,7 @@ package com.byeorustudio.services
 
 import com.byeorustudio.domain.dtos.FoodResisterDto
 import com.byeorustudio.domain.dtos.RestaurantResisterDto
+import com.byeorustudio.domain.tables.Food
 import com.byeorustudio.repositories.RestaurantRepositoryImpl
 import com.byeorustudio.services.interfaces.RestaurantService
 import net.postgis.jdbc.geometry.Point
@@ -41,5 +42,9 @@ class RestaurantServiceImpl: RestaurantService {
             requestDto.normalPrice,
             restaurant
         )
+    }
+
+    override suspend fun getFoodsByRestaurantPk(pk: Long): List<Food> {
+        return restaurantRepositoryImpl.findFoodsByRestaurantPk(pk)
     }
 }
